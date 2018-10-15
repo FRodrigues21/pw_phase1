@@ -1,0 +1,1394 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Websearch\_2018\_lab2-solution}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{web-search-2018---tutorial-2-basic-search-spaces}{%
+\section{Web Search 2018 - Tutorial 2: Basic search
+spaces}\label{web-search-2018---tutorial-2-basic-search-spaces}}
+
+\hypertarget{contents}{%
+\subsection{Contents}\label{contents}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Section \ref{head1}
+\item
+  Section \ref{head2}
+\item
+  Section \ref{head21}
+\item
+  Section \ref{head22}
+\item
+  Section \ref{head23}
+\item
+  Section \ref{head3}
+\item
+  Section \ref{head31}
+\item
+  Section \ref{head32}
+\item
+  Section \ref{head4}
+\item
+  Section \ref{head41}
+\item
+  Section \ref{head42}
+\item
+  Section \ref{head43}
+\item
+  Section \ref{head44}
+\item
+  Section \ref{head5}
+\end{enumerate}
+
+\hypertarget{overview}{%
+\subsection{ Overview}\label{overview}}
+
+The goal of this lab is to develop an architecture to search Text and
+Images, on different vector spaces.
+
+We provide you with an example of how you can represent an image using
+the Histogram of Oriented Gradients image descriptor. Since one image is
+represented as a vector, you can represent multiple images as a matrix.
+Starting from this example, you can add other descriptors such as (HoC
+and GIST).
+
+In summary, you should implement the following functionality:
+
+\begin{itemize}
+\tightlist
+\item
+  Individual feature vectors \textbf{normalization};
+\item
+  Extend the provided code to extract features from images of the
+  project dataset, and \textbf{store them as a matrix};
+\item
+  Add support for \textbf{additional features}, apart from HoG: (HoC and
+  GIST for now);
+\item
+  \textbf{Bag of Words} representation for words. Store texts as a
+  sparse matrix;
+\item
+  Implement a straighforward search function for individual search
+  spaces: Given an image/text as input, retrieve the \textbf{top-k
+  nearest documents}, using an \textbf{adequate distance function}.
+\end{itemize}
+
+We strongly encourage you to use the
+\href{http://scikit-learn.org/stable/}{scikit-learn} library. Most of
+the functionalities that you will need for you project are already
+implemented there.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{feature} \PY{k}{import} \PY{n}{hog}
+        \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{data}\PY{p}{,} \PY{n}{exposure}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{color} \PY{k}{import} \PY{n}{rgb2gray}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{io} \PY{k}{import} \PY{n}{imread}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{transform} \PY{k}{import} \PY{n}{resize}
+        
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{image}
+        
+        \PY{c+c1}{\PYZsh{} Hide all warnings}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using TensorFlow backend.
+
+    \end{Verbatim}
+
+    \hypertarget{image-data-representations}{%
+\section{ Image data representations}\label{image-data-representations}}
+
+\hypertarget{load-and-visualize-a-sample-image}{%
+\subsection{ Load and visualize a sample
+image}\label{load-and-visualize-a-sample-image}}
+
+We start by loading an image. Then we do some pre-processing to prepare
+the image for feature extraction.
+
+Our goal is to represent images using a fixed-length vector, despite the
+original image height and width. Therefore, we resize all images to a
+certain height and width.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{center\PYZus{}crop\PYZus{}image}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{224}\PY{p}{)}\PY{p}{:}
+        
+            \PY{k}{if} \PY{n}{im}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{4}\PY{p}{:} \PY{c+c1}{\PYZsh{} Remove the alpha channel}
+                \PY{n}{im} \PY{o}{=} \PY{n}{im}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+        
+            \PY{c+c1}{\PYZsh{} Resize so smallest dim = 224, preserving aspect ratio}
+            \PY{n}{h}\PY{p}{,} \PY{n}{w}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{im}\PY{o}{.}\PY{n}{shape}
+            \PY{k}{if} \PY{n}{h} \PY{o}{\PYZlt{}} \PY{n}{w}\PY{p}{:}
+                \PY{n}{im} \PY{o}{=} \PY{n}{resize}\PY{p}{(}\PY{n}{image}\PY{o}{=}\PY{n}{im}\PY{p}{,} \PY{n}{output\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{224}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{w} \PY{o}{*} \PY{l+m+mi}{224} \PY{o}{/} \PY{n}{h}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{im} \PY{o}{=} \PY{n}{resize}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{h} \PY{o}{*} \PY{l+m+mi}{224} \PY{o}{/} \PY{n}{w}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{224}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Center crop to 224x224}
+            \PY{n}{h}\PY{p}{,} \PY{n}{w}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{im}\PY{o}{.}\PY{n}{shape}
+            \PY{n}{im} \PY{o}{=} \PY{n}{im}\PY{p}{[}\PY{n}{h} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{112}\PY{p}{:}\PY{n}{h} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{112}\PY{p}{,} \PY{n}{w} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{112}\PY{p}{:}\PY{n}{w} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{112}\PY{p}{]}
+            
+            \PY{k}{return} \PY{n}{im}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{image1}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cars.jpg}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{image2}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lena.jpg}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{image3}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{street.jpg}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{image4}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bird.jpg}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{image5}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cup.jpg}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{image6}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red.jpg}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{image7}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{strawberries.jpg}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{image8}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ferrari.jpg}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{image9}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bird2.jpg}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{image10}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{street2.jpg}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{image11}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{car2.jpg}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{image12}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fat\PYZus{}bird.jpg}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{image13}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{flowers.jpg}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{image14}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{flowers2.jpg}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{image15}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red2.jpg}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{n}{img} \PY{o}{=} \PY{n}{imread}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{image15}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Original shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{img}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Original shape: (683, 1024, 3)
+
+    \end{Verbatim}
+
+    In order to keep the image aspect ratio, we crop the image at the
+center, and resize it:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Resize image}
+        \PY{c+c1}{\PYZsh{}rgb = resize(rgb, (224, 224))}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Resize image with center cropping (square)}
+        \PY{n}{img} \PY{o}{=} \PY{n}{center\PYZus{}crop\PYZus{}image}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{224}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Final shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{img}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Final shape: (224, 224, 3)
+
+    \end{Verbatim}
+
+    For some image features, we do not need color information. Thus, we can
+convert the image to grayscale:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{img\PYZus{}gray} \PY{o}{=} \PY{n}{rgb2gray}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Grayscale final shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{img\PYZus{}gray}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Grayscale final shape: (224, 224)
+
+    \end{Verbatim}
+
+    Visualize both resized original and grayscale images:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Input image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img\PYZus{}gray}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Grayscale image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{histogram-of-oriented-gradients}{%
+\subsection{ Histogram of Oriented
+Gradients}\label{histogram-of-oriented-gradients}}
+
+    \hypertarget{computing-histogram-of-oriented-gradients-hog-using-skimage-library.-hog-scikit-image-documentation}{%
+\paragraph{\texorpdfstring{Computing Histogram of Oriented Gradients
+(HoG) using skimage library.
+\href{http://scikit-image.org/docs/0.14.x/api/skimage.feature.html\#skimage.feature.hog}{HoG
+scikit-image
+Documentation}}{Computing Histogram of Oriented Gradients (HoG) using skimage library. HoG scikit-image Documentation}}\label{computing-histogram-of-oriented-gradients-hog-using-skimage-library.-hog-scikit-image-documentation}}
+
+In the HOG feature descriptor, the distribution ( histograms ) of
+directions of gradients ( oriented gradients ) are used as features.
+Gradients ( x and y derivatives ) of an image are useful as the
+magnitude of gradients is large around edges and corners ( regions of
+abrupt intensity changes ) and we know that edges and corners provide
+more information regarding object shapes than flat regions.
+
+More about HoG descriptor: *
+http://mccormickml.com/2013/05/09/hog-person-detector-tutorial/ *
+http://mccormickml.com/2013/05/07/gradient-vectors/
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{fd}\PY{p}{,} \PY{n}{hog\PYZus{}image} \PY{o}{=} \PY{n}{hog}\PY{p}{(}\PY{n}{img\PYZus{}gray}\PY{p}{,} \PY{n}{orientations}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{pixels\PYZus{}per\PYZus{}cell}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{)}\PY{p}{,} \PY{n}{visualise}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{HoG Feature vector shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{fd}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+HoG Feature vector shape: (10368,)
+
+    \end{Verbatim}
+
+    Visualizing the computed HoG feature:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img\PYZus{}gray}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Input image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Rescale histogram for better display}
+         \PY{n}{hog\PYZus{}image\PYZus{}rescaled} \PY{o}{=} \PY{n}{exposure}\PY{o}{.}\PY{n}{rescale\PYZus{}intensity}\PY{p}{(}\PY{n}{hog\PYZus{}image}\PY{p}{,} \PY{n}{in\PYZus{}range}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{hog\PYZus{}image\PYZus{}rescaled}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Histogram of Oriented Gradients}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{histogram-of-color}{%
+\subsection{ Histogram of Color}\label{histogram-of-color}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Straight forward HoC implementation on RGB space}
+         \PY{c+c1}{\PYZsh{} For a more complete implementation, with better parametrization, etc., you can check the OpenCV library.}
+         
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         
+         \PY{k}{def} \PY{n+nf}{hoc}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{,} \PY{n}{hist\PYZus{}range}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{im\PYZus{}r} \PY{o}{=} \PY{n}{im}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{im\PYZus{}g} \PY{o}{=} \PY{n}{im}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{im\PYZus{}b} \PY{o}{=} \PY{n}{im}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}
+             
+             \PY{n}{red\PYZus{}level} \PY{o}{=} \PY{n}{hist\PYZus{}range}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n}{bins}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{green\PYZus{}level} \PY{o}{=} \PY{n}{hist\PYZus{}range}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/} \PY{n}{bins}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{blue\PYZus{}level} \PY{o}{=} \PY{n}{hist\PYZus{}range}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{/} \PY{n}{bins}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+             
+             \PY{n}{im\PYZus{}red\PYZus{}levels} \PY{o}{=} \PY{n}{im\PYZus{}r} \PY{o}{/} \PY{n}{red\PYZus{}level}
+             \PY{n}{im\PYZus{}green\PYZus{}levels} \PY{o}{=} \PY{n}{im\PYZus{}g} \PY{o}{/} \PY{n}{green\PYZus{}level}
+             \PY{n}{im\PYZus{}blue\PYZus{}levels} \PY{o}{=} \PY{n}{im\PYZus{}b} \PY{o}{/} \PY{n}{blue\PYZus{}level}
+             
+             \PY{n}{ind} \PY{o}{=} \PY{n}{im\PYZus{}blue\PYZus{}levels}\PY{o}{*}\PY{n}{bins}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{bins}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+} \PY{n}{im\PYZus{}green\PYZus{}levels}\PY{o}{*}\PY{n}{bins}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{im\PYZus{}red\PYZus{}levels}
+             
+             \PY{n}{hist\PYZus{}r}\PY{p}{,} \PY{n}{bins\PYZus{}r} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{histogram}\PY{p}{(}\PY{n}{ind}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{bins}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{bins}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{bins}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{hist\PYZus{}r}\PY{p}{,} \PY{n}{bins\PYZus{}r}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{img\PYZus{}as\PYZus{}ubyte}
+         
+         \PY{c+c1}{\PYZsh{} convert image pixels to [0, 255] range, and to uint8 type }
+         \PY{n}{img\PYZus{}int} \PY{o}{=} \PY{n}{img\PYZus{}as\PYZus{}ubyte}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Set bins range according to the image color space}
+         \PY{n}{hist\PYZus{}range\PYZus{}hsv}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{180}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{)}
+         \PY{n}{hist\PYZus{}range\PYZus{}rgb}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{)}
+         \PY{n}{hist\PYZus{}range} \PY{o}{=} \PY{n}{hist\PYZus{}range\PYZus{}hsv}
+         
+         \PY{c+c1}{\PYZsh{} Compute histogram}
+         \PY{n}{hist}\PY{p}{,} \PY{n}{bin\PYZus{}edges} \PY{o}{=} \PY{n}{hoc}\PY{p}{(}\PY{n}{img\PYZus{}int}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n}{hist\PYZus{}range}\PY{o}{=}\PY{n}{hist\PYZus{}range}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Resulting HoC vector shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{hist}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Resulting HoC vector shape: (64,)
+
+    \end{Verbatim}
+
+    \hypertarget{visualize-the-resulting-histogram}{%
+\paragraph{Visualize the resulting
+histogram}\label{visualize-the-resulting-histogram}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{bin\PYZus{}edges}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{hist} \PY{p}{,}\PY{n}{width}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{n}{bin\PYZus{}edges}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{bin\PYZus{}edges}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{hist}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{l+m+mf}{1.3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{text-data-representations}{%
+\section{ Text data representations}\label{text-data-representations}}
+
+\hypertarget{corpus}{%
+\subsection{ Corpus}\label{corpus}}
+
+We will use the brown corpus from NLTK.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k+kn}{import} \PY{n+nn}{nltk}
+         \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{corpus} \PY{k}{import} \PY{n}{brown}
+         \PY{n}{nltk}\PY{o}{.}\PY{n}{download}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{brown}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{corpus} \PY{o}{=} \PY{n}{brown}\PY{o}{.}\PY{n}{sents}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{corpus} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{sent}\PY{p}{)} \PY{k}{for} \PY{n}{sent} \PY{o+ow}{in} \PY{n}{corpus}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total texts: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{corpus}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[nltk\_data] Downloading package brown to
+[nltk\_data]     C:\textbackslash{}Users\textbackslash{}Joao\textbackslash{}AppData\textbackslash{}Roaming\textbackslash{}nltk\_data{\ldots}
+[nltk\_data]   Package brown is already up-to-date!
+Total texts: 57340
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Let\PYZsq{}s inspect some documents from the corpus}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Doc 1: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Doc 2: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{corpus}\PY{p}{[}\PY{l+m+mi}{2555}\PY{p}{]}\PY{p}{,} \PY{n}{corpus}\PY{p}{[}\PY{l+m+mi}{1112}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Doc 1: Buchheister pledged the land would be an `` inviolate '' sanctuary for all birds , animals and plants .
+Doc 2: She snapped five tenths of a second off the mark set by Helen Shipley , of Wellsley College , in the National A.A.U. meet in Columbus , Ohio .
+
+    \end{Verbatim}
+
+    \hypertarget{bag-of-words}{%
+\subsection{ Bag-of-words}\label{bag-of-words}}
+
+In the Bag of Words representation, documents are represented by a
+numerical sparse vector, whose dimension corresponds to the vocabulary
+size of the whole collection. Then, the set of all documents can be
+efficiently represented by a sparse matrix.
+
+To illustrate this, consider the following corpus with two documents:
+
+\begin{verbatim}
+corpus = [
+            ["some random sentence"],  # doc1
+            ["another sentence random sentence"] # doc2
+         ]
+\end{verbatim}
+
+The vocabulary size of our corpus is 4 (there are 4 different words).
+Thus, each document will be represented as a 4-dimensional numeric
+vector. Namely, assuming that we sort words alphabetically, we obtain:
+
+\begin{verbatim}
+        another, random, sentence, some
+doc1 = [   0,       1,      1,       1  ]
+doc1 = [   1,       1,      2,       0  ] 
+\end{verbatim}
+
+Each entry denotes the counts of each word, in the document. Notice that
+we lose information regarding word order, in the BoW representation.
+
+Using counts to create the BoW representation is among the most simple
+representations. There are alternative ways to do it which you can then
+explore such as TF-IDF, and others. For now, we will stick with BoW
+representation based on counts.
+
+\hypertarget{extracting-bow-vectors}{%
+\subsubsection{Extracting BoW vectors}\label{extracting-bow-vectors}}
+
+We will use the CountVectorizer class. Check the documentation to
+understand the API and the default values of the supported parameters:
+http://scikit-learn.org/stable/modules/generated/sklearn.feature\_extraction.text.CountVectorizer.html
+
+The default tokenizer splits documents by whitespaces. This is far from
+optimal for Web text, but is a good starting point.
+
+\hypertarget{using-a-tokenizer-from-nltk}{%
+\subsubsection{Using a tokenizer from
+NLTK}\label{using-a-tokenizer-from-nltk}}
+
+When dealing with text gathered from the Web, it is crucial to have a
+good tokenizer. To understand why, inspect some of the documents from
+the brown corpus.
+
+We will use one of the tokenizers available in NLTK together with the
+CountVectorizer class.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} NLTK Tokenizers documentation: https://www.nltk.org/api/nltk.tokenize.html}
+         
+         \PY{c+c1}{\PYZsh{} from nltk.tokenize import TweetTokenizer}
+         \PY{c+c1}{\PYZsh{} tknzr = TweetTokenizer()}
+         
+         \PY{c+c1}{\PYZsh{} Instantiate TreebankWordTokenizer}
+         \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{tokenize} \PY{k}{import} \PY{n}{TreebankWordTokenizer}
+         \PY{n}{tknzr} \PY{o}{=} \PY{n}{TreebankWordTokenizer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    Create a CountVectorizer object and obtain the BoW sparse matrix for the
+corpus:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}extraction}\PY{n+nn}{.}\PY{n+nn}{text} \PY{k}{import} \PY{n}{CountVectorizer}
+         
+         \PY{n}{vectorizer} \PY{o}{=} \PY{n}{CountVectorizer}\PY{p}{(}\PY{n}{tokenizer}\PY{o}{=}\PY{n}{tknzr}\PY{o}{.}\PY{n}{tokenize}\PY{p}{)}
+         \PY{n}{texts\PYZus{}bow} \PY{o}{=} \PY{n}{vectorizer}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{corpus}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{texts\PYZus{}bow shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ \PYZhy{} Type: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{texts\PYZus{}bow}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n+nb}{type}\PY{p}{(}\PY{n}{texts\PYZus{}bow}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+texts\_bow shape: (57340, 47623) - Type: <class 'scipy.sparse.csr.csr\_matrix'>
+
+    \end{Verbatim}
+
+    The \texttt{texts\_bow} variable is a sparse matrix. You can read more
+about sparse matrix (csr\_matrix) here:
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr\_matrix.html
+
+Let's inspect the vocabulary:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{vocabulary} \PY{o}{=} \PY{n}{vectorizer}\PY{o}{.}\PY{n}{vocabulary\PYZus{}}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Vocabulary size: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{vocabulary}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Vocabulary size: 47623
+
+    \end{Verbatim}
+
+    The vocabulary size is huge and contains a lot of uninformative words.
+Let's do some pre-processing to reduce the vocabulary (e.g.~remove
+Stopwords, remove rare words, etc.):
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} remove stopwords, exclude words that appear less than 3 times}
+         \PY{c+c1}{\PYZsh{} Notice that the NLTK tokenizer is passed as parameter to CountVectorizer}
+         \PY{n}{vectorizer} \PY{o}{=} \PY{n}{CountVectorizer}\PY{p}{(}\PY{n}{stop\PYZus{}words}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{english}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{min\PYZus{}df}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{binary}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{tokenizer}\PY{o}{=}\PY{n}{tknzr}\PY{o}{.}\PY{n}{tokenize}\PY{p}{)}
+         \PY{n}{texts\PYZus{}bow} \PY{o}{=} \PY{n}{vectorizer}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{corpus}\PY{p}{)}
+         \PY{n}{vocabulary} \PY{o}{=} \PY{n}{vectorizer}\PY{o}{.}\PY{n}{vocabulary\PYZus{}}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Vocabulary size: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{vocabulary}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Vocabulary size: 19789
+
+    \end{Verbatim}
+
+    Using these two pre-processing steps, it gets much better.
+
+You can check CountVectorizer documentation for more pre-processing
+steps (e.g.~lowercasing, better tokenizer, stemming, etc.) that may be
+adequate for your use-case.
+
+    \hypertarget{searching-on-a-single-feature-space}{%
+\section{ Searching on a single feature
+space}\label{searching-on-a-single-feature-space}}
+
+\hypertarget{distance-functions-and-normalization}{%
+\subsection{ Distance functions and
+normalization}\label{distance-functions-and-normalization}}
+
+Let's define a function that takes as input a query vector, and a matrix
+of target vectors (the `database'), and returns the K-nearest
+neighbours. Make sure you understand the function below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{pairwise\PYZus{}distances}
+         
+         \PY{k}{def} \PY{n+nf}{k\PYZus{}neighbours}\PY{p}{(}\PY{n}{q}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{euclidean}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Check pairwise\PYZus{}distances function docs: http://scikit\PYZhy{}learn.org/stable/modules/generated/sklearn.metrics.pairwise\PYZus{}distances.html\PYZsh{}sklearn.metrics.pairwise\PYZus{}distances}
+             \PY{n}{dists} \PY{o}{=} \PY{n}{pairwise\PYZus{}distances}\PY{p}{(}\PY{n}{q}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{n}{metric}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Dists gets a shape 1 x NumDocs. Convert it to shape NumDocs (i.e. drop the first dimension)}
+             \PY{n}{dists} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{dists}\PY{p}{)}
+             \PY{n}{sorted\PYZus{}indexes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{dists}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{sorted\PYZus{}indexes}\PY{p}{[}\PY{p}{:}\PY{n}{k}\PY{p}{]}\PY{p}{,} \PY{n}{dists}\PY{p}{[}\PY{n}{sorted\PYZus{}indexes}\PY{p}{[}\PY{p}{:}\PY{n}{k}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    \hypertarget{normalize-vectors-to-unit-length}{%
+\paragraph{Normalize vectors to unit
+length:}\label{normalize-vectors-to-unit-length}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{normalize}
+         \PY{n}{texts\PYZus{}bow} \PY{o}{=} \PY{n}{normalize}\PY{p}{(}\PY{n}{texts\PYZus{}bow}\PY{p}{,} \PY{n}{norm}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{l2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{bag-of-words}{%
+\subsection{ Bag of words}\label{bag-of-words}}
+
+In order to match queries to documents, it is required to apply the same
+processing steps to both the query and the documents. Prepare the text
+query:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{query1} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lawyer of Boston Yankees in the National Football League}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{query2} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{president kennedy}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{query}\PY{o}{=}\PY{n}{query1}
+         
+         \PY{c+c1}{\PYZsh{} Transform query in a BoW representation}
+         \PY{n}{query\PYZus{}bow} \PY{o}{=} \PY{n}{vectorizer}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{p}{[}\PY{n}{query}\PY{p}{]}\PY{p}{)}
+         \PY{n}{query\PYZus{}bow} \PY{o}{=} \PY{n}{normalize}\PY{p}{(}\PY{n}{query\PYZus{}bow}\PY{p}{,} \PY{n}{norm}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{l2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{query-the-database-using-the-prepared-query}{%
+\paragraph{Query the database using the prepared
+query:}\label{query-the-database-using-the-prepared-query}}
+
+    The metric that we will use will be the cosine distance.
+
+The function \texttt{pairwise\_distances} computes distances, not
+similarities. Thus, it will compute the cosine distance \(1-cos(x,y)\).
+Note that this is not a proper metric, as it lacks the triangle
+inequality property.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{k\PYZus{}nearest\PYZus{}indexes}\PY{p}{,} \PY{n}{k\PYZus{}nearest\PYZus{}dists} \PY{o}{=} \PY{n}{k\PYZus{}neighbours}\PY{p}{(}\PY{n}{q}\PY{o}{=}\PY{n}{query\PYZus{}bow}\PY{p}{,} \PY{n}{X}\PY{o}{=}\PY{n}{texts\PYZus{}bow}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cosine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} Inspecting the top\PYZhy{}k results: list of tuples (index of document, distance to query, text of document)}
+         \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{k\PYZus{}nearest\PYZus{}indexes}\PY{p}{,}\PY{n}{k\PYZus{}nearest\PYZus{}dists}\PY{p}{,} \PY{p}{[}\PY{n}{corpus}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{k\PYZus{}nearest\PYZus{}indexes}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} [(1385,
+           0.2614510541240034,
+           "He was the lawyer for Ted Collins' old Boston Yankees in the National Football League ."),
+          (1386,
+           0.6913933000758161,
+           'All was quiet in the office of the Yankees and the local National Leaguers yesterday .'),
+          (1369,
+           0.6913933000758161,
+           'His goal was to obtain a National League team for this city .'),
+          (1457,
+           0.7388835160664532,
+           'A formula to supply players for the new Minneapolis Vikings and the problem of increasing the 1961 schedule to fourteen games will be discussed by National Football League owners at a meeting at the Hotel Warwick today .'),
+          (5636,
+           0.7388835160664532,
+           'When he came to Baltimore , he was leaving a team which was supposed to win the National League pennant , and he was joining what seemed to be a second division American League club .'),
+          (1367,
+           0.7388835160664532,
+           'The 53-year-old Shea , a prominent corporation lawyer with a sports background , is generally recognized as the man most responsible for the imminent return of a National League club to New York .'),
+          (1340,
+           0.7446230407723753,
+           'Skorich was considered the logical choice after the club gave Norm Van Brocklin permission to seek the head coaching job with the Minnesota Vikings , the newest National Football League entry .'),
+          (1372,
+           0.7538170180413345,
+           'When he was unable to bring about immediate expansion , he sought to convince another National League club to move here .'),
+          (19177,
+           0.7592282938284616,
+           'Nearly any lad with a modicum of skill might find a payday awaiting him in the Three I League , or the Pony League , or the Coastal Plains League , or the fast Eastern League , if not indeed in one of the hundreds of city leagues that abounded everywhere .'),
+          (48721, 0.7642977396044841, "I'm no lawyer .")]
+\end{Verbatim}
+            
+    \hypertarget{search-on-histogram-of-colors}{%
+\subsection{ Search on Histogram of
+Colors}\label{search-on-histogram-of-colors}}
+
+Now we will use the same function, \texttt{k\_neighbours}, to search
+over image vector spaces.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{}Images database}
+         \PY{n}{images} \PY{o}{=} \PY{p}{[}\PY{n}{image1}\PY{p}{,} \PY{n}{image2}\PY{p}{,} \PY{n}{image3}\PY{p}{,} \PY{n}{image4}\PY{p}{,} \PY{n}{image5}\PY{p}{,} \PY{n}{image6}\PY{p}{,} \PY{n}{image7}\PY{p}{,} \PY{n}{image8}\PY{p}{,} \PY{n}{image9}\PY{p}{,} \PY{n}{image10}\PY{p}{,} \PY{n}{image15}\PY{p}{]}
+         \PY{n}{bins}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{img\PYZus{}as\PYZus{}ubyte}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{normalize}
+         \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{color}
+         
+         \PY{n}{feats} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{img} \PY{o+ow}{in} \PY{n}{images}\PY{p}{:}
+             \PY{n}{img} \PY{o}{=} \PY{n}{imread}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{img}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} resize image}
+             \PY{n}{img} \PY{o}{=} \PY{n}{center\PYZus{}crop\PYZus{}image}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{224}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Change image color space from RGB to HSV. }
+             \PY{c+c1}{\PYZsh{} HSV color space was designed to more closely align with the way human vision perceive color\PYZhy{}making attributes}
+             \PY{n}{img} \PY{o}{=} \PY{n}{color}\PY{o}{.}\PY{n}{rgb2hsv}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} convert image pixels to [0, 255] range, and to uint8 type}
+             \PY{n}{img\PYZus{}int} \PY{o}{=} \PY{n}{img\PYZus{}as\PYZus{}ubyte}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Extract HoC features}
+             \PY{n}{hist}\PY{p}{,} \PY{n}{bin\PYZus{}edges} \PY{o}{=} \PY{n}{hoc}\PY{p}{(}\PY{n}{img\PYZus{}int}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{n}{bins}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Normalize features}
+             \PY{c+c1}{\PYZsh{} We add 1 dimension to comply with scikit\PYZhy{}learn API}
+             \PY{n}{hist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{normalize}\PY{p}{(}\PY{n}{hist}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{norm}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{l2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{feats}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{hist}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{} Creating a feature matrix for all images}
+         \PY{n}{feats} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feats}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Shape of feature matrix: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{feats}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Shape of feature matrix: (11, 64)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} Prepare image query}
+         \PY{c+c1}{\PYZsh{} try the following: image 11, image12, image13}
+         \PY{n}{image\PYZus{}q} \PY{o}{=} \PY{n}{image13}
+         
+         \PY{n}{img\PYZus{}q} \PY{o}{=} \PY{n}{imread}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{image\PYZus{}q}\PY{p}{)}
+         \PY{n}{img\PYZus{}q\PYZus{}hsv} \PY{o}{=} \PY{n}{color}\PY{o}{.}\PY{n}{rgb2hsv}\PY{p}{(}\PY{n}{img\PYZus{}q}\PY{p}{)}
+         \PY{n}{img\PYZus{}q\PYZus{}hsv} \PY{o}{=} \PY{n}{center\PYZus{}crop\PYZus{}image}\PY{p}{(}\PY{n}{img\PYZus{}q\PYZus{}hsv}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{224}\PY{p}{)}
+         \PY{n}{img\PYZus{}int} \PY{o}{=} \PY{n}{img\PYZus{}as\PYZus{}ubyte}\PY{p}{(}\PY{n}{img\PYZus{}q\PYZus{}hsv}\PY{p}{)}
+         \PY{n}{hist}\PY{p}{,} \PY{n}{bin\PYZus{}edges} \PY{o}{=} \PY{n}{hoc}\PY{p}{(}\PY{n}{img\PYZus{}int}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{n}{bins}\PY{p}{)}
+         
+         \PY{n}{image\PYZus{}q\PYZus{}feat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{normalize}\PY{p}{(}\PY{n}{hist}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{norm}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{l2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Image query feature dimension: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{image\PYZus{}q\PYZus{}feat}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image query feature dimension: (64,)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} Use the implemented function to find the K nearest neighbours on the HoC image vector space.}
+         \PY{n}{k\PYZus{}nearest\PYZus{}indexes}\PY{p}{,} \PY{n}{k\PYZus{}nearest\PYZus{}dists} \PY{o}{=} \PY{n}{k\PYZus{}neighbours}\PY{p}{(}\PY{n}{q}\PY{o}{=}\PY{n}{image\PYZus{}q\PYZus{}feat}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{X}\PY{o}{=}\PY{n}{feats}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{euclidean}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} Inspecting the top\PYZhy{}k results \PYZhy{} list of tuples (image index, distance to query image, image name)}
+         \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{k\PYZus{}nearest\PYZus{}indexes}\PY{p}{,} \PY{n}{k\PYZus{}nearest\PYZus{}dists}\PY{p}{,} \PY{p}{[}\PY{n}{images}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{k\PYZus{}nearest\PYZus{}indexes}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} [(10, 0.845573192138205, 'red2.jpg'),
+          (6, 0.9863331777515734, 'strawberries.jpg'),
+          (8, 1.0448437741073637, 'bird2.jpg'),
+          (9, 1.0707964644610366, 'street2.jpg'),
+          (4, 1.1160208091438566, 'cup.jpg'),
+          (1, 1.19646013334974, 'lena.jpg'),
+          (3, 1.2149713547356729, 'bird.jpg'),
+          (7, 1.2277823976745124, 'ferrari.jpg'),
+          (0, 1.2329417477994196, 'cars.jpg'),
+          (2, 1.2724448802449535, 'street.jpg')]
+\end{Verbatim}
+            
+    \hypertarget{inspect-results-of-image-search}{%
+\subsubsection{Inspect Results of Image
+Search}\label{inspect-results-of-image-search}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Query image: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{image\PYZus{}q}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img\PYZus{}q}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{p}{(}\PY{n}{img\PYZus{}idx}\PY{p}{,} \PY{n}{img\PYZus{}dist}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{k\PYZus{}nearest\PYZus{}indexes}\PY{p}{,}\PY{n}{k\PYZus{}nearest\PYZus{}dists}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{image\PYZus{}fname} \PY{o}{=} \PY{n}{images}\PY{p}{[}\PY{n}{img\PYZus{}idx}\PY{p}{]}
+             \PY{n}{img} \PY{o}{=} \PY{n}{imread}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{image\PYZus{}fname}\PY{p}{)}
+             \PY{n}{img} \PY{o}{=} \PY{n}{center\PYZus{}crop\PYZus{}image}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{224}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Image \PYZsh{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ \PYZhy{} distance: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{img\PYZus{}dist}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Query image: flowers.jpg
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#0 - distance: 0.845573192138205
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#1 - distance: 0.9863331777515734
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#2 - distance: 1.0448437741073637
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#3 - distance: 1.0707964644610366
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#4 - distance: 1.1160208091438566
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_11.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#5 - distance: 1.19646013334974
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_13.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#6 - distance: 1.2149713547356729
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_15.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#7 - distance: 1.2277823976745124
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_17.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#8 - distance: 1.2329417477994196
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_19.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#9 - distance: 1.2724448802449535
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_21.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{search-on-hog-vector-space}{%
+\subsection{ Search on HoG vector
+space}\label{search-on-hog-vector-space}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{}Images database}
+         \PY{n}{images} \PY{o}{=} \PY{p}{[}\PY{n}{image1}\PY{p}{,} \PY{n}{image2}\PY{p}{,} \PY{n}{image3}\PY{p}{,} \PY{n}{image4}\PY{p}{,} \PY{n}{image5}\PY{p}{,} \PY{n}{image6}\PY{p}{,} \PY{n}{image7}\PY{p}{,} \PY{n}{image8}\PY{p}{,} \PY{n}{image9}\PY{p}{,} \PY{n}{image10}\PY{p}{,} \PY{n}{image15}\PY{p}{]}
+         
+         \PY{n}{pixels\PYZus{}per\PYZus{}cell}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{)}
+         \PY{n}{orientations}\PY{o}{=}\PY{l+m+mi}{8}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{img\PYZus{}as\PYZus{}ubyte}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{normalize}
+         \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{color}
+         
+         \PY{n}{feats} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{img} \PY{o+ow}{in} \PY{n}{images}\PY{p}{:}
+             \PY{n}{img} \PY{o}{=} \PY{n}{imread}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{img}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} resize image}
+             \PY{n}{img} \PY{o}{=} \PY{n}{center\PYZus{}crop\PYZus{}image}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{224}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Convert to grayscale}
+             \PY{n}{img} \PY{o}{=} \PY{n}{rgb2gray}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Extract HoG features}
+             \PY{n}{hist} \PY{o}{=} \PY{n}{hog}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{orientations}\PY{o}{=}\PY{n}{orientations}\PY{p}{,} \PY{n}{pixels\PYZus{}per\PYZus{}cell}\PY{o}{=}\PY{n}{pixels\PYZus{}per\PYZus{}cell}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Normalize features}
+             \PY{c+c1}{\PYZsh{} We add 1 dimension to comply with scikit\PYZhy{}learn API}
+             \PY{n}{hist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{normalize}\PY{p}{(}\PY{n}{hist}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{norm}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{l2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{feats}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{hist}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{} Creating a feature matrix for all images}
+         \PY{n}{feats} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feats}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Shape of feature matrix: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{feats}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Shape of feature matrix: (11, 1800)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{} Prepare image query}
+         \PY{c+c1}{\PYZsh{} try the following: image 11, image12, image13}
+         \PY{n}{image\PYZus{}q} \PY{o}{=} \PY{n}{image11}
+         
+         \PY{n}{img\PYZus{}q} \PY{o}{=} \PY{n}{imread}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{image\PYZus{}q}\PY{p}{)}
+         \PY{n}{img\PYZus{}q} \PY{o}{=} \PY{n}{center\PYZus{}crop\PYZus{}image}\PY{p}{(}\PY{n}{img\PYZus{}q}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{224}\PY{p}{)}
+         \PY{n}{img\PYZus{}q} \PY{o}{=} \PY{n}{rgb2gray}\PY{p}{(}\PY{n}{img\PYZus{}q}\PY{p}{)}
+         
+         \PY{n}{hist} \PY{o}{=} \PY{n}{hog}\PY{p}{(}\PY{n}{img\PYZus{}q}\PY{p}{,} \PY{n}{orientations}\PY{o}{=}\PY{n}{orientations}\PY{p}{,} \PY{n}{pixels\PYZus{}per\PYZus{}cell}\PY{o}{=}\PY{n}{pixels\PYZus{}per\PYZus{}cell}\PY{p}{)}
+         \PY{n}{image\PYZus{}q\PYZus{}feat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{normalize}\PY{p}{(}\PY{n}{hist}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{norm}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{l2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Image query feature dimension: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{image\PYZus{}q\PYZus{}feat}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image query feature dimension: (1800,)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} Use the implemented function to find the K nearest neighbours on the HoG image vector space.}
+         \PY{n}{k\PYZus{}nearest\PYZus{}indexes}\PY{p}{,} \PY{n}{k\PYZus{}nearest\PYZus{}dists} \PY{o}{=} \PY{n}{k\PYZus{}neighbours}\PY{p}{(}\PY{n}{q}\PY{o}{=}\PY{n}{image\PYZus{}q\PYZus{}feat}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{X}\PY{o}{=}\PY{n}{feats}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{euclidean}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} Inspecting the top\PYZhy{}k results \PYZhy{} list of tuples (image index, distance to query image, image name)}
+         \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{k\PYZus{}nearest\PYZus{}indexes}\PY{p}{,} \PY{n}{k\PYZus{}nearest\PYZus{}dists}\PY{p}{,} \PY{p}{[}\PY{n}{images}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{k\PYZus{}nearest\PYZus{}indexes}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} [(0, 0.7463698434976643, 'cars.jpg'),
+          (9, 0.7735160568069858, 'street2.jpg'),
+          (6, 0.7914558493872327, 'strawberries.jpg'),
+          (2, 0.8637713919432636, 'street.jpg'),
+          (7, 0.8880615143588726, 'ferrari.jpg'),
+          (8, 0.8979937220959415, 'bird2.jpg'),
+          (1, 0.9084086141214707, 'lena.jpg'),
+          (10, 0.9166115885416387, 'red2.jpg'),
+          (4, 0.9417340667750381, 'cup.jpg'),
+          (5, 0.9999999999999998, 'red.jpg')]
+\end{Verbatim}
+            
+    \hypertarget{inspect-results-of-image-search}{%
+\subsection{Inspect Results of Image
+Search}\label{inspect-results-of-image-search}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Query image: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{image\PYZus{}q}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img\PYZus{}q}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{p}{(}\PY{n}{img\PYZus{}idx}\PY{p}{,} \PY{n}{img\PYZus{}dist}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{k\PYZus{}nearest\PYZus{}indexes}\PY{p}{,}\PY{n}{k\PYZus{}nearest\PYZus{}dists}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{image\PYZus{}fname} \PY{o}{=} \PY{n}{images}\PY{p}{[}\PY{n}{img\PYZus{}idx}\PY{p}{]}
+             \PY{n}{img} \PY{o}{=} \PY{n}{imread}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{image\PYZus{}fname}\PY{p}{)}
+             \PY{n}{img} \PY{o}{=} \PY{n}{center\PYZus{}crop\PYZus{}image}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{224}\PY{p}{)}
+             \PY{n}{img} \PY{o}{=} \PY{n}{rgb2gray}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Image \PYZsh{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ \PYZhy{} distance: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{img\PYZus{}dist}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Query image: car2.jpg
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#0 - distance: 0.7463698434976643
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#1 - distance: 0.7735160568069858
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#2 - distance: 0.7914558493872327
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#3 - distance: 0.8637713919432636
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#4 - distance: 0.8880615143588726
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_11.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#5 - distance: 0.8979937220959415
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_13.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#6 - distance: 0.9084086141214707
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_15.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#7 - distance: 0.9166115885416387
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_17.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#8 - distance: 0.9417340667750381
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_19.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image \#9 - distance: 0.9999999999999998
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_21.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{exercises}{%
+\subsection{ Exercises}\label{exercises}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c+c1}{\PYZsh{} Plot the color histogram of each color channel. Use 32 bins per color channel.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{c+c1}{\PYZsh{} Inspect the BoW vocabulary and try to understand which additional filters you could apply to remove uninformative words.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{} Modify or remove the normalization steps and repeat the experiments. Compare the results with the normalized version and discuss what you observe.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{c+c1}{\PYZsh{} Modify the metric for each space and repeat the experiments. Compare the results with the correct metric and discuss what you observe.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Implement a visual search space with the GIST feature.}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
