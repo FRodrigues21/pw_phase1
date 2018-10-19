@@ -1,6 +1,6 @@
 from skimage.transform import resize
 from sklearn.metrics import pairwise_distances
-
+import numpy as np
 
 def center_crop_image(im, size=224):
 
@@ -31,3 +31,4 @@ def k_neighbours(q, X, metric="euclidean", k=10):
     sorted_indexes = np.argsort(dists)
     
     return sorted_indexes[:k], dists[sorted_indexes[:k]]
+
